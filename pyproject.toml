@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "compleer"
+version = "0.1.0"
+authors = [{ name = "Bertram Aakjær", email = "work.aakjaer@gmail.com" }]
+description = "A cross application text completion tool."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
