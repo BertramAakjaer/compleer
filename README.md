@@ -6,10 +6,10 @@ I used UV while developing the program and to control virtual enviroments, but p
 1. Clone the repository
 ```bash
 # Clone this repository with git
-git clone https://github.com/BertramAakjaer/Authentication-AAU.git
+git clone https://github.com/BertramAakjaer/compleer.git
 
 # Open the directory in terminal
-cd Authentication-AAU/
+cd compleer/
 ```
 
 2. Create Virtual Enviroment & activate
@@ -21,7 +21,16 @@ source .venv/bin/activate
 
 3. Install requirements
 ```bash
-uv pip install -r requirements.txt
+# For Users
+uv sync
+
+# For Devs
+uv sync --no-dev
+```
+
+1. Run the program
+```bash
+uv run compleer
 ```
 
 
@@ -31,15 +40,18 @@ uv pip install -r requirements.txt
 ```bash
 uv pip compile pyproject.toml -o requirements.txt
 ```
-**Generating a requirements file**
+**Install Program as development**
 ```bash
-uv pip compile pyproject.toml -o requirements.txt
+uv pip install -e .
 ```
-**Generating a requirements file**
+**add new requirements**
 ```bash
-uv pip compile pyproject.toml -o requirements.txt
+uv add <package_name>
 ```
-**Generating a requirements file**
+
+**Using ruff**
 ```bash
-uv pip compile pyproject.toml -o requirements.txt
+uv run ruff check .
+uv run ruff check --fix .
+uv run ruff format .
 ```
