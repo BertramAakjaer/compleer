@@ -22,10 +22,10 @@ source .venv/bin/activate
 3. Install requirements
 ```bash
 # For Users
-uv sync
+uv sync --no-dev
 
 # For Devs
-uv sync --no-dev
+uv sync
 ```
 
 1. Run the program
@@ -54,4 +54,14 @@ uv add <package_name>
 uv run ruff check .
 uv run ruff check --fix .
 uv run ruff format .
+```
+
+**Running tests**
+```bash
+uv run pytest
+```
+
+**Building Program**
+```bash
+uv run pyinstaller --onefile --noconsole --windowed --collect-all pynput --icon "icon.ico" --name "compleer" src/compleer/main.py
 ```

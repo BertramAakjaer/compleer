@@ -10,10 +10,13 @@ description = "A cross application text completion tool."
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "pynput>=1.8.1",
+    "pyspellchecker>=0.8.4",
+]
 
 [project.scripts]
-compleer = "src.compleer.main:main"
+compleer = "compleer.main:main"
 
 [project.urls]
 Homepage = "https://aakjaer.site"
@@ -26,7 +29,14 @@ target-version = "py313"
 [tool.ruff.lint]
 select = ["E", "F", "I"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -q"
+
 [dependency-groups]
 dev = [
+    "pyinstaller>=6.17.0",
+    "pytest>=9.0.2",
     "ruff>=0.14.10",
 ]
