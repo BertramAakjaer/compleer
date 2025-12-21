@@ -1,14 +1,19 @@
 import time
 from dataclasses import dataclass, field
 
+
+
+###############################
 def to_days(days: int) -> int:
     return days * 60 * 60 * 24
 
 MAX_AGE: int = to_days(30)
+###############################
 
 
 def current_time_sec() -> int:
     return int(time.time())
+
 
 @dataclass(slots=True, frozen=True)
 class Sentence:
@@ -26,12 +31,12 @@ class ProgramSentences:
     program_title: str
     
     def prune_old_sentences(self) -> None:
-        now = current_time_sec()
+        curr_time = current_time_sec()
         
         while self.sentence_fifo:
             sentence = self.sentence_fifo[0]
             
-            if (now - sentence.created_at) > MAX_AGE:
+            if (curr_time - sentence.created_at) > MAX_AGE:
                 self.sentence_fifo.pop(0)
             else:
                 break
@@ -61,7 +66,8 @@ class ProgramCollection:
                 sentence_fifo=[new_sentence],
             )
             self.programs[program_title] = new_program
-    
+        
+        print(f"Added following sentence to data:\n-\t{stentence_string}\n-\tAdded for [{program_title}]")    
     
     def get_sentences(self, program_title: str, max_tokens: int) -> list[Sentence]:
         if program_title not in self.programs:

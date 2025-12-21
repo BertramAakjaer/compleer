@@ -22,10 +22,10 @@ source .venv/bin/activate
 3. Install requirements
 ```bash
 # For Users
-uv sync --no-dev
+uv sync --no-dev --link-mode=copy
 
 # For Devs
-uv sync
+uv sync --link-mode=copy
 ```
 
 1. Run the program
