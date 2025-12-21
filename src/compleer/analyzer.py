@@ -28,4 +28,4 @@ class TextProcessor:
     def process_word(self, word):
         """Place your 'Understanding' or AI logic here."""
         print(f"DEBUG: Processing completed word -> {word}")
-        # Example: if word == "nrf": trigger_completion("non-refundable")
+        # Example: if word == "nrf": trigger_completion("non-refundable")'

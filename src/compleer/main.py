@@ -1,24 +1,21 @@
 import queue
 import threading
-
 from pynput import keyboard
 
+from compleer.key_grabber import KeyGrabber
+
 # Communication Channels
-raw_queue = queue.Queue()
+raw_input_queue = queue.Queue()
 word_queue = queue.Queue()
 
-# --- THREAD 1: KEYLOGGER ---
-def logger_thread():
-    def on_press(key):
-        raw_queue.put(key)
-    with keyboard.Listener(on_press=on_press) as listener:
-        listener.join()
+# Thread Objects
+key_grabber = KeyGrabber(raw_input_queue) # Thread 1
 
 # --- THREAD 2: PARSER ---
 def parser_thread():
     buffer = []
     while True:
-        key = raw_queue.get()
+        key = raw_input_queue.get()
         # Logic: If space/enter, send buffer to next queue
         if key == keyboard.Key.space:
             word = "".join(buffer)
@@ -42,7 +39,7 @@ def analyzer_thread():
 
 def main():
     threads = [
-        threading.Thread(target=logger_thread, daemon=True),
+        threading.Thread(target=key_grabber, daemon=True),
         threading.Thread(target=parser_thread, daemon=True),
         threading.Thread(target=analyzer_thread, daemon=True)
     ]

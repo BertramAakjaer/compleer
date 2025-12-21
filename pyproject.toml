@@ -12,7 +12,7 @@ license = {file = "LICENSE"}
 requires-python = ">=3.13"
 dependencies = [
     "pynput>=1.8.1",
-    "pyspellchecker>=0.8.4",
+    "pywinctl>=0.4.1",
 ]
 
 [project.scripts]
