@@ -11,7 +11,10 @@ readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.13"
 dependencies = [
+    "customtkinter>=5.2.2",
+    "google-genai>=1.56.0",
     "pynput>=1.8.1",
+    "python-dotenv>=1.2.1",
     "pywinctl>=0.4.1",
 ]
 

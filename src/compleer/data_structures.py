@@ -69,9 +69,9 @@ class ProgramCollection:
         
         print(f"Added following sentence to data:\n-\t{stentence_string}\n-\tAdded for [{program_title}]")    
     
-    def get_sentences(self, program_title: str, max_tokens: int) -> list[Sentence]:
+    def get_sentences(self, program_title: str, max_tokens: int) -> str:
         if program_title not in self.programs:
-            return []
+            return ""
 
         program = self.programs[program_title]
         
@@ -82,10 +82,11 @@ class ProgramCollection:
 
         for sentence in reversed(program.sentence_fifo):
             if current_tokens + sentence.tokens <= max_tokens:
-                selected_buffer.append(sentence)
+                selected_buffer.append(sentence.sentence)
                 current_tokens += sentence.tokens
             else:
                 break
         
         selected_buffer.reverse() # So the original context is kept
-        return selected_buffer
+        as_string = ' '.join(selected_buffer)
+        return as_string

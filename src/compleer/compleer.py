@@ -6,6 +6,7 @@ import time
 from compleer.key_grabber import KeyGrabber
 from compleer.word_seperator import WordSeperator
 from compleer.setence_collector import SentenceCollector
+from compleer.prediction_engine import PredictionEngine
 
 from compleer.data_structures import ProgramCollection
 
@@ -18,16 +19,17 @@ class CompleerApp:
     
     # run as app() instead of app.run()
     def __call__(self) -> None:
-        
         # Thread Objects
         key_grabber = KeyGrabber(self.raw_input_queue)
         word_seperator = WordSeperator(self.raw_input_queue, self.word_queue)
         sentence_collector = SentenceCollector(self.word_queue, self.data_storage)
+        prediction_engine = PredictionEngine(self.data_storage, sentence_collector)
 
         threads = [
             threading.Thread(target=key_grabber, daemon=True),
             threading.Thread(target=word_seperator, daemon=True),
-            threading.Thread(target=sentence_collector, daemon=True)
+            threading.Thread(target=sentence_collector, daemon=True),
+            threading.Thread(target=prediction_engine, daemon=True)
         ]
 
         for t in threads:
